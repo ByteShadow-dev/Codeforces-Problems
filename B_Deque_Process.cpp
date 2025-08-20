@@ -32,15 +32,51 @@ void solve()
         if (left == right)
         {
             ans += "L";
+            last=arr[left];
             left++;
         }
         else
         {
             if (arr[left] > last && arr[right] > last)
             {
+                if (arr[left]>arr[right])
+                {
+                    ans+="LR";
+                    left++;
+                    last = arr[right];
+                    right--;
+                }
+                else{
+                    ans+="RL";
+                    last = arr[left];
+                    left++;
+                    right--;
+                }
+            }
+            else if(arr[left]<last && arr[right]<last){
+                if (arr[left]>arr[right])
+                {
+                    ans+="RL";
+                    last = arr[left];
+                    left++;
+                    right--;
+                }
+                else{
+                    ans+="LR";
+                    last = arr[right];
+                    left++;
+                    right--;
+                }
+            }
+            else{
+                ans+="RL";
+                last = arr[left];
+                left++;
+                right--;
             }
         }
     }
+    cout<<ans<<endl;
 }
 
 int main()
