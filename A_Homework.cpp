@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fast_io ios::sync_with_stdio(false); cin.tie(nullptr);
+#define ll long long
+#define vi vector<int>
+#define all(x) x.begin(), x.end()
+#define pb push_back
+#define ff first
+#define ss second
+const int INF = 1e9 + 5;
+const ll LINF = 1e18;
+
+void solve() {
+    // Solution
+    int n;
+    cin >> n;
+    string a;
+    cin>>a;
+    int m;
+    cin>>m;
+    string b;
+    cin>>b;
+    string c;
+    cin>>c;
+
+    int idx = 0;
+    for (int i = 0; i < m; i++)
+    {
+        if(c[i]=='D'){
+            a += b[idx];
+            idx++;
+        }
+        else{
+            a = b[idx] + a;
+            idx++;
+        }
+    }
+    cout<<a<<endl;
+
+}
+
+int main() {
+    fast_io
+    int T = 1;
+    cin >> T;
+    while (T--) solve();
+    return 0;
+}
