@@ -1,16 +1,67 @@
 #include <bits/stdc++.h>
- 
-void solve() {
-	int n, k; std::cin >> n >> k;
-	std::string s; std::cin >> s, s = " " + s;
-	for (int i = 1, j = 1; i <= n; i = ++j) if (s[i] == '1') {
-		while (j < n && s[j + 1] == '1') j++;
-		if (j - i + 1 >= k) return (void)puts("NO");
+using namespace std;
+
+#define fast_io                  \
+	ios::sync_with_stdio(false); \
+	cin.tie(nullptr);
+#define ll long long
+#define vi vector<int>
+#define all(x) x.begin(), x.end()
+#define pb push_back
+#define ff first
+#define ss second
+const int INF = 1e9 + 5;
+const ll LINF = 1e18;
+
+void solve()
+{
+	// Solution
+	int n, k;
+	cin >> n >> k;
+	string s;
+	cin >> s;
+	s = " " + s;
+	for (int i = 1, j = 1; i <= n; i = ++j) // Good technique
+	{
+		if (s[i] == '1')
+		{
+			while (j < n && s[j + 1] == '1')
+			{
+				j++;
+			}
+			if (j - i + 1 >= k)
+			{
+				cout<<"no"<<endl;
+				return;
+			}
+		}
 	}
-	puts("YES");
-	int c1 = 0, c2 = std::count_if(s.begin(), s.end(), [&](char ch) -> bool { return ch == '1'; });
-	for (int i = 1; i <= n; ++i) 
-		std::cout << (s[i] == '1' ? ++c1 : ++c2) << " \n"[i == n];
+	cout<<"yes"<<endl;
+	int c1 = 0, c2 = 0;
+	for(auto t:s){
+		if(t=='1'){
+			c2++;
+		}
+	}
+	for(int i = 1; i<=n; i++){
+		if(s[i]=='1'){
+			cout<<++c1<<" ";
+		}
+		else{
+			cout<<++c2<<" ";
+		}
+	}
+	cout<<endl;
+
+	
+
 }
- 
-int main() { int t; std::cin >> t; while (t--) solve(); return 0; }
+
+int main()
+{
+	fast_io int T = 1;
+	cin >> T;
+	while (T--)
+		solve();
+	return 0;
+}
