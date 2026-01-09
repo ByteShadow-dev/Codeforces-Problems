@@ -7,8 +7,6 @@ using namespace std;
 using vi = vector<int>;
 
 int main(){
-    vector<string> v = {"fgfae", "rrr"};
-    string s = "dfafr";
-    s = v[1] + s;
-    cout<<s<<endl;
+    int p1 = 2;
+   cout<<(1<<(2*p1)) - 1<<endl;
 }

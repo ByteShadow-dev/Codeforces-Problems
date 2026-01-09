@@ -12,8 +12,22 @@ using namespace std;
 const int INF = 1e9 + 5;
 const ll LINF = 1e18;
 
-void query(int t, int z, int y){
-
+int check(int mid, vi &t, vi &z, vi& y, int m){
+    int T = 0;
+    int total = 0;
+    for (int i = 0; i < z.size(); i++)
+    {
+        int balloons = 0;
+        int cycle_time = t[i]*z[i]+y[i];
+        int full_cycles = mid/cycle_time;
+        int rem = mid%cycle_time;
+        int extra = min(z[i], rem/t[i]);
+        balloons = (extra + (full_cycles*z[i]));
+        total += balloons;
+        if(total>=m)return total;
+    }
+    return total;
+    
 }
 
 void solve() {
@@ -25,8 +39,35 @@ void solve() {
         cin >> t[i] >> z[i] >> y[i];
     }
     
-    
-    
+    int st = 0, end = 1e18;
+    while(st<end){
+        int mid = (st+end)/2;
+        if(check(mid, t, z, y, m)>=m){
+            end = mid;
+        }
+        else{
+            st = mid+1;
+        }
+    }
+    cout<<st<<endl;
+    vi result(n);
+    int remaining = m;
+    for (int i = 0; i < n; i++)
+    {
+
+        int cycle_time = t[i]*z[i]+y[i];
+        int full_cycles = st/cycle_time;
+        int rem = st%cycle_time;
+        int extra = min(z[i], rem/t[i]);
+        int balloons = (extra + (full_cycles*z[i]));
+        balloons = min(balloons, remaining);
+        result[i] = balloons;
+        remaining-=balloons;
+    }
+    for(auto i:result){
+        cout<<i<<" ";
+    }
+    cout<<endl;
 }
 
 int32_t main() {
