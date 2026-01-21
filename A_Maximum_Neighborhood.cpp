@@ -13,29 +13,25 @@ const int INF = 1e9 + 5;
 const ll LINF = 1e18;
 
 void solve() {
-    vector<long double> s(4);
-    for(int i = 0; i < 4; i++) cin >> s[i];
-    long double target;
-    cin >> target;
-
-    sort(s.begin(), s.end());
-    if ((s[1] + s[2] + s[3]) / 3.0 <= target + 1e-9) {
-        cout << "infinite" << endl;
+    int n;
+    cin >> n;
+    if(n==1){
+        cout<<1<<endl;
         return;
     }
-    if ((s[0] + s[1] + s[2]) / 3.0 > target + 1e-9) {
-        cout << "impossible" << endl;
+    if(n==2){
+        cout<<9<<endl;
         return;
     }
-    long double x = (3.0 * target) - (s[1] + s[2]);
-    
-    cout << fixed << setprecision(2) << x << endl;
+    int val1 = ((5*(n*n)) - 5*n - 5);
+    int val2 = ((4*(n*n))-n-4);
+    cout<<max(val1, val2)<<endl;
 }
 
 int32_t main() {
     fast_io
     int32_t T = 1;
-    // cin >> T;
+    cin >> T;
     while (T--) solve();
     return 0;
 }
