@@ -44,7 +44,27 @@ void sieve(vector<vi>& primes,int N){ for(int i=2;i<=N;i++) if(primes[i].empty()
 // ------------------- SOLVE -------------------
 
 void solve(){
-    cout<<binexp(3, 644, 645)<<endl;
+    int a,b ;
+    cin >> a >> b;
+    if((a*b+1)%2 == 0){
+        cout<<a*b+1<<endl;
+        return;
+    }
+    if(a%2==0 && b%2==1){
+        cout<<-1<<endl;
+        return;
+    }
+    if(b%4==0){
+        cout<<(a*b/2)+2<<endl;
+        return;
+    }
+    if(a%2 ==1 && b%2==0){
+        cout<<-1<<endl;
+        return;
+    }
+    if(b%2==0){
+        cout<<a*(b/2)+2<<endl;
+    }
 }
 
 // ------------------- MAIN -------------------
@@ -52,7 +72,7 @@ void solve(){
 int32_t main(){
     fast_io
     int32_t T=1;
-    // cin>>T;
+    cin>>T;
     while(T--) solve();
     return 0;
 }

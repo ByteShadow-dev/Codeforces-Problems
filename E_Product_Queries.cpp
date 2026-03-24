@@ -13,7 +13,7 @@ using namespace std;
 #define printvec(vec,n) do{rep(i,0,n){cout<<vec[i]<<" ";}cout<<endl;} while (0)
 
 // read array macro
-#define forin(arr, n) for (int i = 0; i < n; i++) cin >> arr[i];
+#define forin(arr, n) for (int i = 1; i <= n; i++) cin >> arr[i];
 
 const ll LINF = 1e18;
 
@@ -41,10 +41,56 @@ void printArr(vector<int> arr){ for(auto i:arr) cout<<i<<" "; cout<<endl; }
 // sieve storing prime factors for every number
 void sieve(vector<vi>& primes,int N){ for(int i=2;i<=N;i++) if(primes[i].empty()) for(int j=i;j<=N;j+=i) primes[j].push_back(i); }
 
+vector<int> primeFactors(int n) {
+    vector<int> factors(n+1, 0);
+
+    // Store the number of 2s that divide n
+    while (n % 2 == 0) {
+        factors[2]++;
+        n = n / 2;
+    }
+
+    // n must be odd at this point. So we can 
+     // skip one element (i = i + 2)
+    for (int i = 3; i * i <= n; i = i + 2) {
+        while (n % i == 0) {
+            factors[i]++;
+            n = n / i;
+        }
+    }
+
+    // If n is a prime number greater than 2
+    if (n > 2)
+        factors[n]++;
+
+    return factors;
+}
+
 // ------------------- SOLVE -------------------
 
 void solve(){
-    cout<<binexp(3, 644, 645)<<endl;
+    int n;
+    cin >> n;
+    vi a(n+1);
+    forin(a, n);
+    for (int i = 1; i <= n; i++)
+    {
+        vi prime_factors = primeFactors(i);
+        for(auto p:prime_factors){
+            // bool flag = false;
+            int cnt = 0;
+            if(i!=0){
+                for (int j = 1; j <= n; j++)
+                {
+                    if()
+                }
+                
+            }
+        }
+
+    }
+    
+
 }
 
 // ------------------- MAIN -------------------
@@ -52,7 +98,7 @@ void solve(){
 int32_t main(){
     fast_io
     int32_t T=1;
-    // cin>>T;
+    cin>>T;
     while(T--) solve();
     return 0;
 }

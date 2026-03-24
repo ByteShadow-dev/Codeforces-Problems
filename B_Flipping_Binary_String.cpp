@@ -44,7 +44,68 @@ void sieve(vector<vi>& primes,int N){ for(int i=2;i<=N;i++) if(primes[i].empty()
 // ------------------- SOLVE -------------------
 
 void solve(){
-    cout<<binexp(3, 644, 645)<<endl;
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int z = 0;
+    vi ones, zeroes;
+    for (int i = 0; i < n; i++)
+    {
+        if(s[i]=='0'){
+            zeroes.push_back(i+1);
+        }
+        else{
+            ones.push_back(i+1);
+        }
+    }
+    if(zeroes.size()==n){
+        cout<<0<<endl;
+        return;
+    }
+    if(zeroes.size()==1){
+        cout<<1<<endl;
+        for (int i = 0; i < n; i++)
+        {
+            if(s[i]=='0'){
+                cout<<i+1<<endl;
+                break;
+            }
+        }
+        return;
+        
+    }
+    if(n%2==0){
+        if(ones.size()%2==0){
+            cout<<ones.size()<<endl;
+            for(auto i:ones){
+                cout<<i<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+        else{
+            cout<<zeroes.size()<<endl;
+            for(auto i:zeroes){
+                cout<<i<<" ";
+            }
+            cout<<endl;
+            return;
+        }
+    }
+    else{
+        if(ones.size()%2!=0){
+            cout<<-1<<endl;
+            return;
+        }
+        else{
+            cout<<ones.size()<<endl;
+            for(auto i: ones){
+                cout<<i<<" ";
+            }
+            cout<<endl;
+        }
+    }
 }
 
 // ------------------- MAIN -------------------
@@ -52,7 +113,7 @@ void solve(){
 int32_t main(){
     fast_io
     int32_t T=1;
-    // cin>>T;
+    cin>>T;
     while(T--) solve();
     return 0;
 }

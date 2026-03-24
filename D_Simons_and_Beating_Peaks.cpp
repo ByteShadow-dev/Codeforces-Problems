@@ -43,8 +43,69 @@ void sieve(vector<vi>& primes,int N){ for(int i=2;i<=N;i++) if(primes[i].empty()
 
 // ------------------- SOLVE -------------------
 
+
+
+// Function to find the Max Depth using the O(n) Cartesian Tree construction
+int getMaxDepth(vi &a) {
+    int n = a.size();
+    if (n == 0) return 0;
+
+    vi left(n, -1), right(n, -1);
+    stack<int> s;
+
+    // Step 1: Build the Cartesian Tree (Max-Heap) in O(n)
+    for (int i = 0; i < n; i++) {
+        int last_popped = -1;
+        
+        // Pop elements smaller than current element a[i]
+        while (!s.empty() && a[s.top()] < a[i]) {
+            last_popped = s.top();
+            s.pop();
+        }
+
+        // The last element popped is the largest value smaller than a[i] 
+        // to its left, so it becomes a[i]'s left child.
+        if (last_popped != -1) {
+            left[i] = last_popped;
+        }
+
+        // The element remaining on top of the stack is the first element 
+        // larger than a[i] to its left, so a[i] becomes its right child.
+        if (!s.empty()) {
+            right[s.top()] = i;
+        }
+
+        s.push(i);
+    }
+
+    // Step 2: Find the root (the bottom-most element in the stack)
+    int root = -1;
+    while (!s.empty()) {
+        root = s.top();
+        s.pop();
+    }
+
+    // Step 3: Simple DFS to find max depth starting from root
+    // We use a lambda for convenience
+    auto findDepth = [&](auto self, int node) -> int {
+        if (node == -1) return 0;
+        return 1 + max(self(self, left[node]), self(self, right[node]));
+    };
+
+    return findDepth(findDepth, root);
+}
+
 void solve(){
-    cout<<binexp(3, 644, 645)<<endl;
+    int n;
+    cin >> n;
+    vi a(n);
+    forin(a, n);
+    if (n == 0) return;
+
+    vi left(n, -1), right(n, -1);
+    stack<int> s;
+    cout<<n-getMaxDepth(a)<<endl;
+
 }
 
 // ------------------- MAIN -------------------
@@ -52,10 +113,15 @@ void solve(){
 int32_t main(){
     fast_io
     int32_t T=1;
-    // cin>>T;
+    cin>>T;
     while(T--) solve();
     return 0;
 }
+
+/*
+yes i geminied this, i am trying to learn :)
+*/
+
 
 /*
 STL + BIT TIPS (Quick Reference)
